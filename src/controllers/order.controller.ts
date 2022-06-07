@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+} from "@nestjs/common";
 import { CreateOrderDto } from "dto/create-order.dto";
 import { UpdateOrderDto } from "dto/update-order.dto";
 import { ObjectId } from "mongoose";
@@ -43,5 +52,14 @@ export class OrderController {
     await this.orderService.update(id, product, body);
 
     return { response: "Pedido atualizado." };
+  }
+
+  @Delete(":id")
+  public async remove(
+    @Param("id") id: ObjectId
+  ): Promise<{ response: string }> {
+    await this.orderService.remove(id);
+
+    return { response: `Pedido ${id} removido.` };
   }
 }

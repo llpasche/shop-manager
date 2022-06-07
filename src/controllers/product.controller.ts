@@ -18,24 +18,28 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Post()
-  public async create(@Body() body: CreateProductDto): Promise<{response: string, product: Product}> {
+  public async create(
+    @Body() body: CreateProductDto
+  ): Promise<{ response: string; product: Product }> {
     const product = await this.productService.create(body);
 
-    return {response: "Produto cadastrado.", product: product}
+    return { response: "Produto cadastrado.", product: product };
   }
 
   @Get()
-  public async findAll(): Promise<{response: Product[]}> {
+  public async findAll(): Promise<{ response: Product[] }> {
     const allProducts = await this.productService.findAll();
 
-    return {response: allProducts}
+    return { response: allProducts };
   }
 
   @Get(":id")
-  public async findById(@Param("id", ParseIntPipe) id: number): Promise<{response: Product}> {
+  public async findById(
+    @Param("id", ParseIntPipe) id: number
+  ): Promise<{ response: Product }> {
     const foundProduct = await this.productService.findById(id);
 
-    return {response: foundProduct};
+    return { response: foundProduct };
   }
 
   @Put(":id")
@@ -49,9 +53,11 @@ export class ProductController {
   }
 
   @Delete(":id")
-  public async remove(@Param("id", ParseIntPipe) id: number): Promise<{response: string}> {
+  public async remove(
+    @Param("id", ParseIntPipe) id: number
+  ): Promise<{ response: string }> {
     await this.productService.remove(id);
 
-    return {response: `Produto ${id} removido.`}
+    return { response: `Produto ${id} removido.` };
   }
 }

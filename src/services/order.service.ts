@@ -124,7 +124,6 @@ export class OrderService {
             { product_id: foundProduct.product_id },
             { qty_stock: foundProduct.qty_stock - quantityDifference }
           );
-
         } else {
           throw new UnprocessableEntityException(
             "Insira um valor diferente para atualizar seu pedido."
